@@ -7,15 +7,21 @@ var notification_id = "empty";
 
 // Code
 setInterval(function(){ 
-    //this code runs every second 
-    getJSON('http://192.168.2.107/mc_message_for_termux/me')
-    .then(function(response) {
-      console.log(response.message);
-      create_notification(response.message)
-    }).catch(function(error) {
-      console.log(error);
-    });
-    
+  //this code runs every second 
+  getJSON('http://192.168.2.107:2311/mc_message_for_termux/me')
+  .then(function(response) {
+    console.log(response.message);
+    create_notification(response.message)
+  }).catch(function(error) {
+      getJSON('http://stardash.hopto.org/mc_message_for_termux/me')
+      .then(function(response) {
+        console.log(response.message);
+        create_notification(response.message)
+      }).catch(function(error) {
+        console.log(error);
+      });
+  });
+  
 }, 1000);
 
 
