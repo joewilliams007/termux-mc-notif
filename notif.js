@@ -4,19 +4,32 @@
 const { exec } = require("child_process");
 const getJSON = require('get-json')
 var notification_id = "empty";
+var last_notif = "connected"
 
 // Code
 setInterval(function(){ 
   //this code runs every second 
   getJSON('http://192.168.2.107:2311/mc_message_for_termux/me')
   .then(function(response) {
-    console.log(response.message);
-    create_notification(response.message)
+
+    if (response.message == last_notif) {
+
+    } else {
+      console.log(response.message);
+      create_notification(response.message)
+    }
+
   }).catch(function(error) {
-      getJSON('http://stardash.hopto.org/mc_message_for_termux/me')
+      getJSON('http://stardash.hopto.org:2311/mc_message_for_termux/me')
       .then(function(response) {
-        console.log(response.message);
-        create_notification(response.message)
+
+        if (response.message == last_notif) {
+
+        } else {
+          console.log(response.message);
+          create_notification(response.message)
+        }
+
       }).catch(function(error) {
         console.log(error);
       });
