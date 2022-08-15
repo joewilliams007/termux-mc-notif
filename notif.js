@@ -3,7 +3,6 @@
 // Imports
 const { exec } = require("child_process");
 const getJSON = require('get-json')
-var notification_id = "empty";
 var last_notif = "connected"
 
 // Code
@@ -48,13 +47,11 @@ function create_notification (notif) {
     exec(`termux-notification 
     --ongoing 
     --priority max 
+    -i/--id messageofmc
     -t/--title Minecraft: ${notif}
     --type default`)
-
-    console.log("created notification");
 }
 
 function delete_notification () {
     exec(`termux-notification-remove ${notification_id}`)
-    console.log("deleted notification");
 }
