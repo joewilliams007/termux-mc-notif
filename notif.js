@@ -15,6 +15,7 @@ setInterval(function(){
     if (response.message == last_notif) {
 
     } else {
+      last_notif = response.message
       console.log(response.message);
       create_notification(response.message)
     }
